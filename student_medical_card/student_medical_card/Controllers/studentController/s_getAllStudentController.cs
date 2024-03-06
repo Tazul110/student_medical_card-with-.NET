@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using student_medical_card.Models.Responses;
 using student_medical_card.Service.StudentServ.Interfaces;
 
@@ -15,6 +16,7 @@ namespace student_medical_card.Controllers.studentController
             _Serv = s;
         }
 
+        [Authorize]
         [HttpGet]
         [Route("[action]")]
         public s_Response GetAll_Students()

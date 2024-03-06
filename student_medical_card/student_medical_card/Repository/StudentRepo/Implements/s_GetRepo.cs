@@ -3,10 +3,8 @@ using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using student_medical_card.Models;
-using student_medical_card.Models.DTO;
 using student_medical_card.Repository.StudentRepo.Interfaces;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using System.Collections.Generic;
+
 
 namespace student_medical_card.Repository.StudentRepo.Implements
 {

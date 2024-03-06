@@ -1,6 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
-using student_medical_card.Models;
-using student_medical_card.Models.DTO;
+﻿using student_medical_card.Models;
 
 namespace student_medical_card.Service.StudentServ.Interfaces
 {

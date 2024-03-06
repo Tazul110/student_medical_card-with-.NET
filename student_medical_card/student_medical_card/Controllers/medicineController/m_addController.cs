@@ -5,6 +5,7 @@ using student_medical_card.Models.Responses;
 using student_medical_card.Models;
 using student_medical_card.Service.PrescriptionRepo.interfaces;
 using student_medical_card.Service.MedicineServ.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace student_medical_card.Controllers.medicineController
 {
@@ -20,7 +21,7 @@ namespace student_medical_card.Controllers.medicineController
             _service = service;
         }
 
-
+        [Authorize]
         [HttpPost]
         [Route("AddMedicine")]
         public m_Response AddMedicines(Medicine medicine)

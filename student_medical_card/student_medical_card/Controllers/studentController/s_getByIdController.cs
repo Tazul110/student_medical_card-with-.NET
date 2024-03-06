@@ -1,9 +1,5 @@
-﻿using Azure;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
-using student_medical_card.Models.DTO;
 using student_medical_card.Service.StudentServ.Interfaces;
 
 namespace student_medical_card.Controllers.studentController
@@ -20,6 +16,7 @@ namespace student_medical_card.Controllers.studentController
             
             _crudGetBy = crudGetBy;
         }
+        [Authorize]
         [HttpGet("{s_Id}")]
         public IActionResult GetStudentWithPrescriptions(int s_Id)
         {

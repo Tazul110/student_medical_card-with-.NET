@@ -22,8 +22,8 @@ namespace student_medical_card.Controllers.prescriptionController
                 _service = service;
             }
 
-          
-            [HttpPost]
+        [Authorize]
+        [HttpPost]
             [Route("AddPrescription")]
             public p_Response AddPrescription(Prescription prescription)
             {
