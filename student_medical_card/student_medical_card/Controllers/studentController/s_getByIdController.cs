@@ -4,7 +4,7 @@ using student_medical_card.Service.StudentServ.Interfaces;
 
 namespace student_medical_card.Controllers.studentController
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     public class s_getByIdController : ControllerBase
     {
@@ -17,8 +17,8 @@ namespace student_medical_card.Controllers.studentController
             _crudGetBy = crudGetBy;
         }
         [Authorize]
-        [HttpGet("{s_Id}")]
-        public IActionResult GetStudentWithPrescriptions(int s_Id)
+        [HttpGet("GetById")]
+        public IActionResult GetById(int s_Id)
         {
             var studentPrescription = _crudGetBy.sGetById(s_Id);
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Azure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
@@ -55,8 +56,35 @@ namespace student_medical_card.Controllers.LoginController
 
 
 
-        private string GenerateAccessToken(string refreshToken)
+        /*private string GenerateAccessToken(string refreshToken)
         {
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var handler = new JwtSecurityTokenHandler();
+            var refreshTokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = key,
+                ValidIssuer = _config["Jwt:Issuer"],
+                ValidAudience = _config["Jwt:Audience"],
+                ClockSkew = TimeSpan.Zero
+            };
+
+            SecurityToken securityToken;
+            var principal = handler.ValidateToken(refreshToken, refreshTokenValidationParameters, out securityToken);*/
+
+        // ... (existing code)
+
+        // Existing code...
+
+        private IActionResult GenerateAccessToken(string refreshToken)
+        {
+            SqlConnection connection = new SqlConnection(_config.GetConnectionString("CrudConnection"));
+            IActionResult response = Unauthorized();
+
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
@@ -75,12 +103,7 @@ namespace student_medical_card.Controllers.LoginController
             SecurityToken securityToken;
             var principal = handler.ValidateToken(refreshToken, refreshTokenValidationParameters, out securityToken);
 
-            // Log claims for debugging
-            var claims = principal?.Claims.Select(c => $"{c.Type}: {c.Value}") ?? new List<string>();
-            Debug.WriteLine($"Claims: {string.Join(", ", claims)}");
-
-            // Extract user information from the principal
-            var userEmailClaim = principal?.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+            var userEmailClaim = principal?.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
             var userIdClaim = principal?.FindFirst(JwtRegisteredClaimNames.Jti)?.Value;
 
             var user = new User
@@ -89,27 +112,37 @@ namespace student_medical_card.Controllers.LoginController
                 // You may need to extract other user properties from claims
             };
 
-            Debug.WriteLine($"UserEmail: {user?.userEmail}");
+            Debug.WriteLine($"UserEmail22: {user?.userEmail}");
 
-            var tokenClaims = new[]
+            var authenticatedUser = _userServ.AuthenticateUser(user?.userEmail);
+
+            if (authenticatedUser != null)
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user?.userEmail),
-                new Claim(JwtRegisteredClaimNames.Jti, userIdClaim ?? Guid.NewGuid().ToString()),
-                // Add additional claims if needed
-            };
+                var accessToken = GenerateToken(authenticatedUser);
+                var refreshToken1 = GenerateToken(authenticatedUser, true);
 
-            var expirationMinutes = Convert.ToDouble(_config["Jwt:TokenExpirationInMinutes"]);
+                response = Ok(new { token = accessToken, refreshToken = refreshToken1, message = "valid credentials" });
+            }
+            else
+            {
+                response = BadRequest(new { message = "Try Again... Invalid user or Invalid password" });
+            }
 
-            var token = new JwtSecurityToken(
-                _config["Jwt:Issuer"],
-                _config["Jwt:Audience"],
-                tokenClaims,
-                expires: DateTime.Now.AddMinutes(expirationMinutes),
-                signingCredentials: credentials
-            );
+            return response;
 
-            return handler.WriteToken(token);
+          
         }
+
+        [AllowAnonymous]
+        [HttpPost("refresh")]
+        public IActionResult RefreshToken([FromBody] RefreshRequest request)
+        {
+            var newAccessToken = GenerateAccessToken(request.RefreshToken);
+
+            return Ok(newAccessToken);
+        }
+
+
 
 
         [AllowAnonymous]
@@ -137,14 +170,6 @@ namespace student_medical_card.Controllers.LoginController
         }
 
 
-        [AllowAnonymous]
-        [HttpPost("refresh")]
-        public IActionResult RefreshToken([FromBody] RefreshRequest request)
-        {
-            var newAccessToken = GenerateAccessToken(request.RefreshToken);
-
-            return Ok(new { token = newAccessToken });
-        }
 
 
     }

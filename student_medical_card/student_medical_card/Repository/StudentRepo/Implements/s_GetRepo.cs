@@ -24,14 +24,17 @@ namespace student_medical_card.Repository.StudentRepo.Implements
                 connection.Open();
 
                 var query = @"
-                SELECT s.s_Id, s.s_Name, s.s_Dept, s.s_Gender, s.s_Email, s.b_Date,
-                       p.p_Id, p.s_Id, p.health_condition, p.prescribeBy, p.prescribe_date_time,
-                       m.m_Id, m.p_Id, m.m_Name, m.m_Type, m.consumption_Rule, m.m_Days
-                FROM Student2 s
-                LEFT JOIN Prescription2 p ON s.s_Id = p.s_Id
-                LEFT JOIN Medicine2 m ON p.p_Id = m.p_Id
-                WHERE s.s_Id = @s_Id
-            ";
+               
+                    SELECT s.s_Id, s.s_Name, s.s_Dept, s.s_Gender, s.s_Email, s.b_Date,
+                    p.p_Id, p.s_Id, p.health_condition, p.prescribeBy, p.prescribe_date_time,
+                    m.m_Id, m.p_Id, m.m_Name, m.m_Type, m.consumption_Rule, m.m_Days
+                    FROM Student2 s
+                    LEFT JOIN Prescription2 p ON s.s_Id = p.s_Id
+                    LEFT JOIN Medicine2 m ON p.p_Id = m.p_Id
+                    WHERE s.s_Id = @s_Id
+                    ORDER BY p.p_Id";
+
+
 
                 var studentPrescriptionDictionary = new Dictionary<int, Student>();
 
