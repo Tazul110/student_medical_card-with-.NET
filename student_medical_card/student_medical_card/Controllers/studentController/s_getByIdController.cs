@@ -16,7 +16,7 @@ namespace student_medical_card.Controllers.studentController
             
             _crudGetBy = crudGetBy;
         }
-        [Authorize]
+        //[Authorize]
         [HttpGet("GetById")]
         public IActionResult GetById(int s_Id)
         {

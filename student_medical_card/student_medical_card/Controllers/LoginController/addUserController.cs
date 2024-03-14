@@ -10,11 +10,11 @@ namespace student_medical_card.Controllers.LoginController
 {
     [Route("api/")]
     [ApiController]
-    public class L_addUserController : ControllerBase
+    public class addUserController : ControllerBase
     {
         private readonly L_IAddUserServ _serv;
 
-        public L_addUserController(L_IAddUserServ serv)
+        public addUserController(L_IAddUserServ serv)
         {
 
             _serv = serv;

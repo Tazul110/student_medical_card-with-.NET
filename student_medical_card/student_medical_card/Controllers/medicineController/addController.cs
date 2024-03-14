@@ -11,17 +11,17 @@ namespace student_medical_card.Controllers.medicineController
 {
     [Route("api/")]
     [ApiController]
-    public class m_addController : ControllerBase
+    public class addController : ControllerBase
     {
         private readonly m_IAddServ _service;
         
-        public m_addController(IConfiguration configuration, m_IAddServ service)
+        public addController(IConfiguration configuration, m_IAddServ service)
         {
            
             _service = service;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost]
         [Route("AddMedicine")]
         public m_Response AddMedicines(Medicine medicine)

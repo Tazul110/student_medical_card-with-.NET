@@ -16,7 +16,7 @@ namespace student_medical_card.Controllers.studentController
             _Serv = s;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         [Route("[action]")]
         public s_Response GetAll_Students()

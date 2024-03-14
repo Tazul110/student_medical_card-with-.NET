@@ -10,19 +10,19 @@ namespace student_medical_card.Controllers.prescriptionController
 {
     [Route("api/")]
     [ApiController]
-    public class p_addController : ControllerBase
+    public class addController : ControllerBase
     {
        
             private readonly p_IAddServ _service;
             private readonly IConfiguration _configuration;
 
-            public p_addController(IConfiguration configuration, p_IAddServ service)
+            public addController(IConfiguration configuration, p_IAddServ service)
             {
                 _configuration = configuration;
                 _service = service;
             }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost]
             [Route("AddPrescription")]
             public p_Response AddPrescription(Prescription prescription)

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using student_medical_card.Models.Responses;
@@ -10,18 +9,18 @@ namespace student_medical_card.Controllers.studentController
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class s_addController : ControllerBase
+    public class addController : ControllerBase
     {
         private readonly s_IAddServ _service;
         private readonly IConfiguration _configuration;
 
-        public s_addController(IConfiguration configuration, s_IAddServ service)
+        public addController(IConfiguration configuration, s_IAddServ service)
         {
             _configuration = configuration;
             _service = service;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost]
         [Route("AddStudent")]
         public s_Response AddStudent(Student student)

@@ -8,6 +8,8 @@ using student_medical_card.Repository.PrescriptionRepo.Implementations;
 using student_medical_card.Repository.PrescriptionRepo.Interfaces;
 using student_medical_card.Repository.StudentRepo.Implements;
 using student_medical_card.Repository.StudentRepo.Interfaces;
+using student_medical_card.Repository.TestRepo.Implements;
+using student_medical_card.Repository.TestRepo.Interfaces;
 using student_medical_card.Service.LoginServ.Implementations;
 using student_medical_card.Service.LoginServ.Interfaces;
 using student_medical_card.Service.MedicineServ.Implementations;
@@ -16,6 +18,8 @@ using student_medical_card.Service.PrescriptionRepo.interfaces;
 using student_medical_card.Service.PrescriptionServ.implementation;
 using student_medical_card.Service.StudentServ.Implementations;
 using student_medical_card.Service.StudentServ.Interfaces;
+using student_medical_card.Service.TestServ.Implements;
+using student_medical_card.Service.TestServ.Interfaces;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -45,6 +49,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IAddRepo, AddRepo>();
+builder.Services.AddScoped<t_IAddServ, t_AddServ>();
 
 builder.Services.AddScoped<IGetUserByEmail, GetUserByEmail>();
 builder.Services.AddScoped<IGetUserByEmailServ, GetUserByEmailServ>();
@@ -79,6 +86,7 @@ if (app.Environment.IsDevelopment())
 app.UseAuthentication();
 app.UseHttpsRedirection();
 
+app.UseCors(policy=> policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 app.UseAuthorization();
 
 app.MapControllers();
