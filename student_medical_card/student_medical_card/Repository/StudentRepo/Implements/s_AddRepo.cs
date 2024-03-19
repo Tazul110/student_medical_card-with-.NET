@@ -8,13 +8,19 @@ namespace student_medical_card.Repository.StudentRepo.Implements
 {
     public class s_AddRepo:s_IAddRepo
     {
-        public s_Response AddStudent(SqlConnection connection, Student student)
+        private readonly IConfiguration _configuration;
+        public s_AddRepo(IConfiguration configuration)
         {
-            s_Response s_response = new s_Response();
+            _configuration = configuration;
+        }
+        public s2_Response AddStudent(Student2 student)
+        {
+            SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("CrudConnection"));
+            s2_Response s_response = new s2_Response();
 
 
             //int i = connection.Execute("INSERT INTO student2 (s_Id, s_Name, s_Dept, s_Gender, s_Email, b_Date) VALUES (@s_Id, @s_Name, @s_Dept, @s_Gender, @s_Email, @b_Date)", student);
-            int i = connection.Execute("INSERT INTO student2 (s_Id, s_Name, s_Dept, s_Gender, s_Email, b_Date, s_Image) VALUES (@s_Id, @s_Name, @s_Dept, @s_Gender, @s_Email, @b_Date, @s_Image)", student);
+            int i = connection.Execute("INSERT INTO student2 (s_Id, s_Name, s_Dept, s_Gender, s_Email, b_Date) VALUES (@s_Id, @s_Name, @s_Dept, @s_Gender, @s_Email, @b_Date)", student);
 
             if (i > 0)
             {

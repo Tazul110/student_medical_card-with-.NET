@@ -23,12 +23,12 @@ namespace student_medical_card.Controllers.studentController
         //[Authorize]
         [HttpPost]
         [Route("AddStudent")]
-        public s_Response AddStudent(Student student)
+        public s2_Response AddStudent(Student2 student)
         {
             SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("CrudConnection"));
-            s_Response response = new s_Response();
+            s2_Response response = new s2_Response();
 
-            response = _service.s_Add(connection, student);
+            response = _service.s_Add(student);
             return response;
         }
     }

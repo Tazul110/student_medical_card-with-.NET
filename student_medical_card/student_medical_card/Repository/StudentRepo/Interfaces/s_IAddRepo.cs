@@ -6,6 +6,6 @@ namespace student_medical_card.Repository.StudentRepo.Interfaces
 {
     public interface s_IAddRepo
     {
-        s_Response AddStudent(SqlConnection connection, Student student);
+        s2_Response AddStudent(Student2 student);
     }
 }

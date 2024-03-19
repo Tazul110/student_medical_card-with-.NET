@@ -20,7 +20,7 @@ namespace student_medical_card.Service.StudentServ.Implementations
             s_IAddRepo = IAddRepo;
             _logService = logService;
         }
-        public s_Response s_Add(SqlConnection connection, Student student)
+        public s2_Response s_Add(Student2 student)
         {
             var log = new Log
             {
@@ -30,7 +30,7 @@ namespace student_medical_card.Service.StudentServ.Implementations
                 IsActive = true,
             };
             var logmsg = _logService.Createlog(log);
-            return s_IAddRepo.AddStudent(connection, student);
+            return s_IAddRepo.AddStudent(student);
         }       
     
     }
