@@ -9,12 +9,12 @@ namespace student_medical_card.Controllers.studentController
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class addController : ControllerBase
+    public class s_addController : ControllerBase
     {
         private readonly s_IAddServ _service;
         private readonly IConfiguration _configuration;
 
-        public addController(IConfiguration configuration, s_IAddServ service)
+        public s_addController(IConfiguration configuration, s_IAddServ service)
         {
             _configuration = configuration;
             _service = service;

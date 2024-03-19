@@ -9,9 +9,15 @@ namespace student_medical_card.Repository.PrescriptionRepo.Implementations
 {
     public class p_AddRepo : p_IAddRepo
     {
-        public p_Response AddPrescription(SqlConnection connection, Prescription prescription)
+        private readonly IConfiguration _configuration;
+        public p_AddRepo(IConfiguration configuration)
         {
-            p_Response p_response = new p_Response();
+            _configuration = configuration;
+        }
+        public p2_Response AddPrescription(Prescription2 prescription)
+        {
+            SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("CrudConnection"));
+            p2_Response p_response = new p2_Response();
 
             try
             {
@@ -22,7 +28,7 @@ namespace student_medical_card.Repository.PrescriptionRepo.Implementations
                 {
                     p_response.StatusCode = 200;
                     p_response.StatusMessage = "Prescription added.";
-                    p_response.Prescription = prescription;
+                    p_response.Prescription2 = prescription;
                 }
                 else
                 {
