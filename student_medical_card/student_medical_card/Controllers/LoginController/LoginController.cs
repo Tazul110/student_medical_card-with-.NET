@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.IdentityModel.Tokens;
 using student_medical_card.Models.LogIn;
+using student_medical_card.Models.Responses;
 using student_medical_card.Service.LoginServ.Interfaces;
 using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
@@ -20,13 +21,14 @@ namespace student_medical_card.Controllers.LoginController
     {
         private IConfiguration _config;
         private readonly IGetUserByEmailServ _userServ;
+        private readonly L_IAddUserServ _addUser;
 
 
-        public LoginController(IConfiguration configuration, IGetUserByEmailServ user)
+        public LoginController(IConfiguration configuration, IGetUserByEmailServ user, L_IAddUserServ addUser)
         {
             _config = configuration;
             _userServ = user;
-
+            _addUser = addUser;
         }
 
         private string GenerateToken(User user, bool isRefreshToken = false)
@@ -168,6 +170,19 @@ namespace student_medical_card.Controllers.LoginController
 
             return response;
         }
+
+
+        [HttpPost]
+        [Route("addUser")]
+        public userResponse AddUser(User user)
+        {
+
+            userResponse response = new userResponse();
+
+            response = _addUser.add(user);
+            return response;
+        }
+
 
 
 
