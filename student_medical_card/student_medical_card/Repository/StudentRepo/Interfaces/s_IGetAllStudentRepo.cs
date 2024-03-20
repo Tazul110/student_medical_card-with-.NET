@@ -6,6 +6,6 @@ namespace student_medical_card.Repository.StudentRepo.Interfaces
 {
     public interface s_IGetAllStudentRepo
     {
-        s_Response GetAllStudents();
+        s2_Response GetAllStudents();
     }
 }

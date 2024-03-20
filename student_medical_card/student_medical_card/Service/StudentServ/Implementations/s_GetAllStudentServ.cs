@@ -12,7 +12,7 @@ namespace student_medical_card.Service.StudentServ.Implementations
             _repo = repo;
         }
 
-        public s_Response Get()
+        public s2_Response Get()
         {
             return _repo.GetAllStudents();
         }

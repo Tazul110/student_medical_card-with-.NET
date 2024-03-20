@@ -11,7 +11,7 @@ namespace student_medical_card.Models
         public string s_Email { get; set; }
         public DateTime b_Date { get; set; }
 
-        public byte[] s_Image { get; set; }
+        /*public byte[] s_Image { get; set; }*/
 
         public List<Prescription> listPrescription { get; set; }
         

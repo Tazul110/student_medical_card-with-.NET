@@ -16,13 +16,13 @@ namespace student_medical_card.Repository.StudentRepo.Implements
         {
             _configuration = configuration;
         }
-        public s_Response GetAllStudents()
+        public s2_Response GetAllStudents()
         {
             SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("CrudConnection"));
-            s_Response response = new s_Response();
+            s2_Response response = new s2_Response();
 
 
-            var lstStudents = connection.Query<Student>("SELECT * FROM Student2").ToList();
+            var lstStudents = connection.Query<Student2>("SELECT * FROM Student2").ToList();
 
             if (lstStudents.Count > 0)
             {

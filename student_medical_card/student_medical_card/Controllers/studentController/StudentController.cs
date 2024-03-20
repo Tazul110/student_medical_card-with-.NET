@@ -52,9 +52,9 @@ namespace student_medical_card.Controllers.studentController
 
         [HttpGet]
         [Route("GetAll")]
-        public s_Response GetAll_Students()
+        public s2_Response GetAll_Students()
         {
-            s_Response response = new s_Response();
+            s2_Response response = new s2_Response();
 
             response = _GetAll.Get();
             return response;
