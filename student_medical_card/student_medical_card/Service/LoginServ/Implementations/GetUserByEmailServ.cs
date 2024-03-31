@@ -3,7 +3,6 @@ using student_medical_card.Models;
 using student_medical_card.Models.LogIn;
 using student_medical_card.Repository.LoginRepo.Interfaces;
 using student_medical_card.Service.LoginServ.Interfaces;
-using student_medical_card.Service.LogServ.Implements;
 using student_medical_card.Service.LogServ.Interfaces;
 using System.Runtime.Intrinsics.X86;
 using System.Text.Json;

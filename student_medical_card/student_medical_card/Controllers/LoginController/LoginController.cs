@@ -118,12 +118,12 @@ namespace student_medical_card.Controllers.LoginController
 
             var authenticatedUser = _userServ.AuthenticateUser(user?.userEmail);
 
-            if (authenticatedUser != null)
+            if (authenticatedUser != null && authenticatedUser.userPassword == user.userPassword)
             {
                 var accessToken = GenerateToken(authenticatedUser);
                 var refreshToken1 = GenerateToken(authenticatedUser, true);
 
-                response = Ok(new { token = accessToken, refreshToken = refreshToken1, message = "valid credentials" });
+                response = Ok(new { token = accessToken, refreshToken = refreshToken1, message = "valid credentials",userName=user.userName });
             }
             else
             {
@@ -156,12 +156,12 @@ namespace student_medical_card.Controllers.LoginController
 
             var authenticatedUser = _userServ.AuthenticateUser( user.userEmail);
 
-            if (authenticatedUser != null)
+            if (authenticatedUser != null && authenticatedUser.userPassword == user.userPassword)
             {
                 var accessToken = GenerateToken(authenticatedUser);
                 var refreshToken = GenerateToken(authenticatedUser, true);
 
-                response = Ok(new { token = accessToken, refreshToken = refreshToken, message = "valid credentials" });
+                response = Ok(new { token = accessToken, refreshToken = refreshToken, message = "valid credentials", userName = authenticatedUser.userName });
             }
             else
             {

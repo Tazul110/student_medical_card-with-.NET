@@ -22,6 +22,7 @@ namespace student_medical_card.Repository.StudentRepo.Implements
             s2_Response response = new s2_Response();
 
 
+
             var lstStudents = connection.Query<Student2>("SELECT * FROM Student2").ToList();
 
             if (lstStudents.Count > 0)

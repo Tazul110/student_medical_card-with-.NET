@@ -5,6 +5,7 @@ using student_medical_card.Models.Responses;
 using student_medical_card.Models;
 using student_medical_card.Service.StudentServ.Interfaces;
 using student_medical_card.Models.LogIn;
+using Microsoft.AspNetCore.Authorization;
 
 namespace student_medical_card.Controllers.studentController
 {
@@ -23,7 +24,7 @@ namespace student_medical_card.Controllers.studentController
             _GetAll = getAll;
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         [Route("AddStudent")]
         public s2_Response AddStudent(Student2 student)
@@ -34,9 +35,9 @@ namespace student_medical_card.Controllers.studentController
             return response;
         }
 
-
+        [Authorize]
         [HttpGet]
-        [Route("GetById")]
+        [Route("GetById/{s_Id}")]
         public IActionResult GetById(int s_Id)
         {
             var studentPrescription = _GetBy.sGetById(s_Id);
@@ -49,7 +50,7 @@ namespace student_medical_card.Controllers.studentController
             return Ok(studentPrescription);
         }
 
-
+        [Authorize]
         [HttpGet]
         [Route("GetAll")]
         public s2_Response GetAll_Students()
