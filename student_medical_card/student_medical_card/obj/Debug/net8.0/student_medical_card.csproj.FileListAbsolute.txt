@@ -551,3 +551,4 @@ C:\Users\TN-99345\Desktop\smart_medical_card\student_medical_card\student_medica
 C:\Users\TN-99345\Desktop\smart_medical_card\student_medical_card\student_medical_card\obj\Debug\net8.0\student_medical_card.pdb
 C:\Users\TN-99345\Desktop\smart_medical_card\student_medical_card\student_medical_card\obj\Debug\net8.0\student_medical_card.genruntimeconfig.cache
 C:\Users\TN-99345\Desktop\smart_medical_card\student_medical_card\student_medical_card\obj\Debug\net8.0\ref\student_medical_card.dll
+D:\student_medical_card_03\student_medical_card\student_medical_card\bin\Debug\net8.0\student_medical_card.staticwebassets.runtime.json
